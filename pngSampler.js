@@ -6,21 +6,15 @@
 // connect image to bounding box 
 // break down into a function 
 
-var rx;
-var ry;
-var rh;
-var rw;
-
-var onex;
-var oney;
-
-
 var one;
 var two;
 var three;
 var img1;
 var img2;
 var img3;
+
+var imgList = [];
+var soundList = [];
 
 function preload() {
 	one = loadSound("https://cdn.rawgit.com/AlexHeselton/png_sampler/df50637e/one.wav");
@@ -33,53 +27,47 @@ function preload() {
 
 function setup() {
 	createCanvas(windowWidth, windowHeight); 
-	ellipseMode(RADIUS);
-	var onex = 10;
-	var oney = 10;
+	new bird = (img1, one, 10, 10, 400, 400);
 }
 
 function draw() {
 
 	background(255);
+	// for (i = 0; i < imgList.length; i++) {
+	// 	imgList[i].display();
+	// 	soundList[i].play();
+	// }
 
-	image(img1, onex, oney);
-	if ((mouseX > onex) && (mouseX < onex + 799) && (mouseY > oney) && (mouseY < oney + 999) && (mouseIsPressed)) {
-	 	one.play();
+	bird.display();
+	bird.play();
+	
+
+}
+
+function drawBird(tempImg, tempSound, tempX, tempY, tempW, tempH) {
+	this.img = tempImg;
+	this.sound = tempSound;
+	this.x = tempX;
+	this.y= tempY;
+	this.w = tempW;
+	this.h = tempH;
+
+	this.display = function() {
+		imgage(this.img, this.x, this.y, this.w, this.h);
 	}
 
+	this.play = function() {
+		if ((mouseX > this.x) && (mouseX < this.x + this.w) && (mouseY > this.y) && (mouseY < this.y + this.h) && (mouseIsPressed)) {
+			this.sound.play();
+		}
+	}
+}
 
 
-
-	// //rectangle
-	// if ((mouseX > rx) && (mouseX < rx + rw) && (mouseY > ry) && (mouseY < ry + rh) && (mouseIsPressed)) {
-	// 	fill(255);
-	// 	one.play();
-	// }
-	// else if ((mouseX > rx) && (mouseX < rx + rw) && (mouseY > ry) && (mouseY < ry + rh)) {
-	// 	fill(125); 
-	// }
-	// else {
-	// 	fill(0);
-	// }
-	// rect(rx, ry, rw, rh);
-
-	// //Circle
-	// cd = dist(mouseX, mouseY, cx, cy);
-	// if ((cd < cRadius) && (mouseIsPressed)) {
-	// 	fill(255);
-	// 	two.play();
-	// }
-	// else if (cd < cRadius) {
-	// 	fill(125);
-	// }
-	// else {
-	// 	fill(0);
-	// }
-	// ellipse(cx, cy, cRadius);
 
 
 	
-}
+
 
 
 
