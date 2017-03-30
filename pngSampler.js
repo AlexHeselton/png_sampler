@@ -16,6 +16,10 @@ var img3;
 var imgList = [];
 var soundList = [];
 
+var parrot;
+var hummingbird;
+var dove;
+
 function preload() {
 	one = loadSound("https://cdn.rawgit.com/AlexHeselton/png_sampler/df50637e/one.wav");
 	two = loadSound("https://cdn.rawgit.com/AlexHeselton/png_sampler/df50637e/two.wav");
@@ -27,7 +31,9 @@ function preload() {
 
 function setup() {
 	createCanvas(windowWidth, windowHeight); 
-	new bird = (img1, one, 10, 10, 400, 400);
+	parrot = new Bird(img1, one, 10, 10, 200, 200);
+	dove = new Bird(img2, two, 220, 10, 200, 200);
+	hummingbird = new Bird(img3, three, 440, 10, 200, 200);
 }
 
 function draw() {
@@ -38,13 +44,18 @@ function draw() {
 	// 	soundList[i].play();
 	// }
 
-	bird.display();
-	bird.play();
-	
+	parrot.display();
+	parrot.play();
+
+	dove.display();
+	dove.play();
+
+	hummingbird.display();
+	hummingbird.play();
 
 }
 
-function drawBird(tempImg, tempSound, tempX, tempY, tempW, tempH) {
+function Bird(tempImg, tempSound, tempX, tempY, tempW, tempH) {
 	this.img = tempImg;
 	this.sound = tempSound;
 	this.x = tempX;
@@ -53,7 +64,7 @@ function drawBird(tempImg, tempSound, tempX, tempY, tempW, tempH) {
 	this.h = tempH;
 
 	this.display = function() {
-		imgage(this.img, this.x, this.y, this.w, this.h);
+		image(this.img, this.x, this.y, this.w, this.h);
 	}
 
 	this.play = function() {
