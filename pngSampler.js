@@ -35,9 +35,12 @@ var two;
 var three;
 
 function preload() {
-	one = loadSound("https://cdn.rawgit.com/AlexHeselton/sampler/e6eeedf3/one.wav");
-	two = loadSound("https://cdn.rawgit.com/AlexHeselton/sampler/e6eeedf3/two.wav");
-	three = loadSound("https://cdn.rawgit.com/AlexHeselton/sampler/e6eeedf3/three.wav");
+	one = loadSound("https://cdn.rawgit.com/AlexHeselton/png_sampler/df50637e/one.wav");
+	two = loadSound("https://cdn.rawgit.com/AlexHeselton/png_sampler/df50637e/two.wav");
+	three = loadSound("https://cdn.rawgit.com/AlexHeselton/png_sampler/df50637e/three.wav");
+	img1 = loadImage("");
+	img2 = loadImage("");
+	img3 = loadImage("");
 }
 
 function setup() {
