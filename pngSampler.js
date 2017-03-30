@@ -1,117 +1,84 @@
-//Sampler for Taurin
-
+//Bird sampler
 
 /////
 //To do
 // png image instead of drawing, + sound
 // connect image to bounding box 
 // break down into a function 
-//
 
-//rectangle variables
 var rx;
 var ry;
-var rw = 80;
-var rh = 60;
+var rh;
+var rw;
 
-//circle variables
-var cd;
-var cx;
-var cy;
-var cRadius = 40;
+var onex;
+var oney;
 
-//ellipse variables
-var ed;
-var ex;
-var ey;
-var eRadius = 40;
-var startRadius = 40;
-var maxRadius = 60;
-var growthSpeed = 0.25;
-var grow = false;
 
 var one;
 var two;
 var three;
+var img1;
+var img2;
+var img3;
 
 function preload() {
 	one = loadSound("https://cdn.rawgit.com/AlexHeselton/png_sampler/df50637e/one.wav");
 	two = loadSound("https://cdn.rawgit.com/AlexHeselton/png_sampler/df50637e/two.wav");
 	three = loadSound("https://cdn.rawgit.com/AlexHeselton/png_sampler/df50637e/three.wav");
-	img1 = loadImage("");
-	img2 = loadImage("");
-	img3 = loadImage("");
+	img1 = loadImage("https://cdn.rawgit.com/AlexHeselton/png_sampler/2798f14c/bird1.png");
+	img2 = loadImage("https://cdn.rawgit.com/AlexHeselton/png_sampler/2798f14c/bird2.png");
+	img3 = loadImage("https://cdn.rawgit.com/AlexHeselton/png_sampler/2798f14c/bird3.png");
 }
 
 function setup() {
 	createCanvas(windowWidth, windowHeight); 
 	ellipseMode(RADIUS);
-	rx = windowWidth/4;
-	ry = windowHeight/4;
-	cx = (windowWidth/4) * 3;
-	cy = windowHeight/4;
-	ex = windowWidth/2;
-	ey = (windowHeight / 4) * 3;
+	var onex = 10;
+	var oney = 10;
 }
 
 function draw() {
 
 	background(255);
-	//rectangle
-	if ((mouseX > rx) && (mouseX < rx + rw) && (mouseY > ry) && (mouseY < ry + rh) && (mouseIsPressed)) {
-		fill(255);
-		one.play();
-	}
-	else if ((mouseX > rx) && (mouseX < rx + rw) && (mouseY > ry) && (mouseY < ry + rh)) {
-		fill(125); 
-	}
-	else {
-		fill(0);
-	}
-	rect(rx, ry, rw, rh);
 
-	//Circle
-	cd = dist(mouseX, mouseY, cx, cy);
-	if ((cd < cRadius) && (mouseIsPressed)) {
-		fill(255);
-		two.play();
+	image(img1, onex, oney);
+	if ((mouseX > onex) && (mouseX < onex + 799) && (mouseY > oney) && (mouseY < oney + 999) && (mouseIsPressed)) {
+	 	one.play();
 	}
-	else if (cd < cRadius) {
-		fill(125);
-	}
-	else {
-		fill(0);
-	}
-	ellipse(cx, cy, cRadius);
 
-	//ellipse
-	// ed = dist(mouseX, mouseY, ex, ey);
-	// if ((ed < eRadius) && (mouseIsPressed)) {
- //    	if (eRadius <= startRadius) {
- //        	eRadius += growthSpeed;
- //        	grow = true;
- //    	}
- //    	else if ((eRadius > startRadius) && (eRadius < maxRadius)) {
- //        	if (grow == true) {
- //          	eRadius += growthSpeed;
- //        	}
- //        }
- //        else {
- //          	eRadius -= growthSpeed;
- //        }
- //    }
- //    else {
- //    	if  (eRadius > startRadius) {
- //    		eRadius -= growthSpeed;
- //        	grow = false;	
- //    	}
- //    	else {
- //    		eRadius = startRadius;
- //    	}
-        
- //    }
- //    ellipse(ex, ey, eRadius);
- 
+
+
+
+	// //rectangle
+	// if ((mouseX > rx) && (mouseX < rx + rw) && (mouseY > ry) && (mouseY < ry + rh) && (mouseIsPressed)) {
+	// 	fill(255);
+	// 	one.play();
+	// }
+	// else if ((mouseX > rx) && (mouseX < rx + rw) && (mouseY > ry) && (mouseY < ry + rh)) {
+	// 	fill(125); 
+	// }
+	// else {
+	// 	fill(0);
+	// }
+	// rect(rx, ry, rw, rh);
+
+	// //Circle
+	// cd = dist(mouseX, mouseY, cx, cy);
+	// if ((cd < cRadius) && (mouseIsPressed)) {
+	// 	fill(255);
+	// 	two.play();
+	// }
+	// else if (cd < cRadius) {
+	// 	fill(125);
+	// }
+	// else {
+	// 	fill(0);
+	// }
+	// ellipse(cx, cy, cRadius);
+
+
+	
 }
 
 
