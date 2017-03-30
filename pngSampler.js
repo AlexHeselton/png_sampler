@@ -2,9 +2,7 @@
 
 /////
 //To do
-// png image instead of drawing, + sound
-// connect image to bounding box 
-// break down into a function 
+// bird colors 
 
 var one;
 var two;
@@ -13,8 +11,7 @@ var img1;
 var img2;
 var img3;
 
-var imgList = [];
-var soundList = [];
+var birdList = [];
 
 var parrot;
 var hummingbird;
@@ -34,24 +31,27 @@ function setup() {
 	parrot = new Bird(img1, one, 10, 10, 200, 200);
 	dove = new Bird(img2, two, 220, 10, 200, 200);
 	hummingbird = new Bird(img3, three, 440, 10, 200, 200);
+	birdList = [parrot, dove, hummingbird];
 }
 
 function draw() {
 
 	background(255);
-	// for (i = 0; i < imgList.length; i++) {
-	// 	imgList[i].display();
-	// 	soundList[i].play();
-	// }
+	for (i = 0; i < birdList.length; i++) {
+		birdList[i].display();
+		birdList[i].play();
+	}
 
-	parrot.display();
-	parrot.play();
+	print((frameCount % 30)*10);
 
-	dove.display();
-	dove.play();
+	// parrot.display();
+	// parrot.play();
 
-	hummingbird.display();
-	hummingbird.play();
+	// dove.display();
+	// dove.play();
+
+	// hummingbird.display();
+	// hummingbird.play();
 
 }
 
@@ -62,16 +62,36 @@ function Bird(tempImg, tempSound, tempX, tempY, tempW, tempH) {
 	this.y= tempY;
 	this.w = tempW;
 	this.h = tempH;
+	this.active = false
 
 	this.display = function() {
 		image(this.img, this.x, this.y, this.w, this.h);
+		if (this.activated() == 1) {
+			tint((random(0,255)), 150, 25, (frameCount % 30)*10);
+		}
+		else {
+			noTint();
+		}
 	}
 
 	this.play = function() {
 		if ((mouseX > this.x) && (mouseX < this.x + this.w) && (mouseY > this.y) && (mouseY < this.y + this.h) && (mouseIsPressed)) {
 			this.sound.play();
+			//change color
+			
+
 		}
 	}
+
+	this.activated = function() {
+		if ((mouseX > this.x) && (mouseX < this.x + this.w) && (mouseY > this.y) && (mouseY < this.y + this.h) && (mouseIsPressed)) {
+			return 1
+		}
+		else {
+			return 0
+		}
+	}
+
 }
 
 
