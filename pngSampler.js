@@ -2,7 +2,10 @@
 
 /////
 //To do
-// bird colors 
+// color on right bird - order of display changed fixed this!
+// fade properly - brain hurts too much 
+// function that places them in regards to screen width
+// size changes according to screen size 
 
 var one;
 var two;
@@ -17,6 +20,11 @@ var parrot;
 var hummingbird;
 var dove;
 
+var birdWidth;
+var height; 
+
+var birdNo = 3;
+
 function preload() {
 	one = loadSound("https://cdn.rawgit.com/AlexHeselton/png_sampler/df50637e/one.wav");
 	two = loadSound("https://cdn.rawgit.com/AlexHeselton/png_sampler/df50637e/two.wav");
@@ -28,15 +36,20 @@ function preload() {
 
 function setup() {
 	createCanvas(windowWidth, windowHeight); 
-	parrot = new Bird(img1, one, 10, 10, 200, 200);
-	dove = new Bird(img2, two, 220, 10, 200, 200);
-	hummingbird = new Bird(img3, three, 440, 10, 200, 200);
-	birdList = [parrot, dove, hummingbird];
+	
+	
 }
 
 function draw() {
 
 	background(255);
+
+	birdWidth = windowWidth / birdNo.length;
+	parrot = new Bird(img1, one, 0, 0, birdWidth, birdWidth);
+	dove = new Bird(img2, two, 400, 0, birdWidth, birdWidth);
+	hummingbird = new Bird(img3, three, 800, 0, birdWidth, birdWidth);
+	birdList = [parrot, dove, hummingbird];
+	
 	for (i = 0; i < birdList.length; i++) {
 		birdList[i].display();
 		birdList[i].play();
@@ -62,24 +75,21 @@ function Bird(tempImg, tempSound, tempX, tempY, tempW, tempH) {
 	this.y= tempY;
 	this.w = tempW;
 	this.h = tempH;
-	this.active = false
+	this.active = 0
 
 	this.display = function() {
-		image(this.img, this.x, this.y, this.w, this.h);
 		if (this.activated() == 1) {
-			tint((random(0,255)), 150, 25, (frameCount % 30)*10);
+			tint(0, 150, 25, (frameCount % 30)*10);
 		}
 		else {
 			noTint();
 		}
+		image(this.img, this.x, this.y, this.w, this.h);
 	}
 
 	this.play = function() {
 		if ((mouseX > this.x) && (mouseX < this.x + this.w) && (mouseY > this.y) && (mouseY < this.y + this.h) && (mouseIsPressed)) {
 			this.sound.play();
-			//change color
-			
-
 		}
 	}
 
