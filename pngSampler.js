@@ -32,24 +32,33 @@ function preload() {
 	img1 = loadImage("https://cdn.rawgit.com/AlexHeselton/png_sampler/2798f14c/bird1.png");
 	img2 = loadImage("https://cdn.rawgit.com/AlexHeselton/png_sampler/2798f14c/bird2.png");
 	img3 = loadImage("https://cdn.rawgit.com/AlexHeselton/png_sampler/2798f14c/bird3.png");
+	sound = [one, two, three];
+	img = [img1, img2, img3];
 }
 
 function setup() {
 	createCanvas(windowWidth, windowHeight); 
-	
-	
+	birdWidth = windowWidth / birdNo;
+	parrot = new Bird(img1, one, 0, 0, birdWidth, birdWidth);
+	dove = new Bird(img2, two, 400, 0, birdWidth, birdWidth);
+	hummingbird = new Bird(img3, three, 800, 0, birdWidth, birdWidth);
+	birdList = [parrot, dove, hummingbird];
+	birdList[random(2)];
+
+	for (i = 0; i < birdNo; i++) {
+		i += birdWidth;
+		birdList[i] = new Bird(img[random(img.length-1)], sound[random(sound.length-1)], i, 0, birdWidth, birdWidth);
+	}
 }
 
 function draw() {
 
 	background(255);
 
-	birdWidth = windowWidth / birdNo.length;
-	parrot = new Bird(img1, one, 0, 0, birdWidth, birdWidth);
-	dove = new Bird(img2, two, 400, 0, birdWidth, birdWidth);
-	hummingbird = new Bird(img3, three, 800, 0, birdWidth, birdWidth);
-	birdList = [parrot, dove, hummingbird];
-	
+	for (i = 0; i < birdNo; i++) {
+		
+	}
+
 	for (i = 0; i < birdList.length; i++) {
 		birdList[i].display();
 		birdList[i].play();
@@ -78,7 +87,7 @@ function Bird(tempImg, tempSound, tempX, tempY, tempW, tempH) {
 	this.active = 0
 
 	this.display = function() {
-		if (this.activated() == 1) {
+		if (this.activated()) {
 			tint(0, 150, 25, (frameCount % 30)*10);
 		}
 		else {
@@ -95,10 +104,10 @@ function Bird(tempImg, tempSound, tempX, tempY, tempW, tempH) {
 
 	this.activated = function() {
 		if ((mouseX > this.x) && (mouseX < this.x + this.w) && (mouseY > this.y) && (mouseY < this.y + this.h) && (mouseIsPressed)) {
-			return 1
+			return true
 		}
 		else {
-			return 0
+			return false
 		}
 	}
 
