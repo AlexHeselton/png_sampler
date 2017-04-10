@@ -15,15 +15,20 @@ var img2;
 var img3;
 
 var birdList = [];
+var sound =[];
+var img = [];
 
-var parrot;
-var hummingbird;
-var dove;
+// var parrot;
+// var hummingbird;
+// var dove;
 
 var birdWidth;
 var height; 
 
-var birdNo = 3;
+var birdNo = 16;
+var birdXPos;
+var birdYPos;
+var gridSize;
 
 function preload() {
 	one = loadSound("https://cdn.rawgit.com/AlexHeselton/png_sampler/df50637e/one.wav");
@@ -32,39 +37,50 @@ function preload() {
 	img1 = loadImage("https://cdn.rawgit.com/AlexHeselton/png_sampler/2798f14c/bird1.png");
 	img2 = loadImage("https://cdn.rawgit.com/AlexHeselton/png_sampler/2798f14c/bird2.png");
 	img3 = loadImage("https://cdn.rawgit.com/AlexHeselton/png_sampler/2798f14c/bird3.png");
-	sound = [one, two, three];
-	img = [img1, img2, img3];
 }
 
 function setup() {
 	createCanvas(windowWidth, windowHeight); 
-	birdWidth = windowWidth / birdNo;
-	parrot = new Bird(img1, one, 0, 0, birdWidth, birdWidth);
-	dove = new Bird(img2, two, 400, 0, birdWidth, birdWidth);
-	hummingbird = new Bird(img3, three, 800, 0, birdWidth, birdWidth);
-	birdList = [parrot, dove, hummingbird];
-	birdList[random(2)];
 
-	for (i = 0; i < birdNo; i++) {
-		i += birdWidth;
-		birdList[i] = new Bird(img[random(img.length-1)], sound[random(sound.length-1)], i, 0, birdWidth, birdWidth);
+	sound = [one, two, three];
+	img = [img1, img2, img3];
+	print(img);
+	print(sound);
+
+	birdWidth = windowWidth / birdNo;
+	// parrot = new Bird(img1, one, 0, 0, birdWidth, birdWidth);
+	// dove = new Bird(img2, two, 400, 0, birdWidth, birdWidth);
+	// hummingbird = new Bird(img3, three, 800, 0, birdWidth, birdWidth);
+	// birdList = [parrot, dove, hummingbird];
+	// birdList[random(2)];
+
+	gridSize = 200;
+
+	for (var i = 0; i <= birdNo; i++) {
+		for (var x = gridSize; x <= windowWidth - gridSize; x += gridSize) {
+			for (var y = gridSize; y < windowHeight - gridSize; y += gridSize) {
+				birdList[i]= new Bird(img[Math.floor(Math.random() * img.length)], sound[Math.floor(Math.random() * sound.length)], x, y, birdWidth, birdWidth);
+			}
+		
+		print(birdList[i]);
+		}
+	
 	}
+	
 }
 
 function draw() {
 
 	background(255);
 
-	for (i = 0; i < birdNo; i++) {
-		
-	}
 
-	for (i = 0; i < birdList.length; i++) {
+	for (i = 0; i < birdNo; i++) {
 		birdList[i].display();
 		birdList[i].play();
 	}
 
-	print((frameCount % 30)*10);
+	print(birdWidth);
+	//print(birdWidth);
 
 	// parrot.display();
 	// parrot.play();
